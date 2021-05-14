@@ -1,15 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import {
   hypertensionCalculator,
   kidneyDiseaseCalculator,
   calculateDropsKidney,
-} from "../../utils/fns";
-import { hypertensionData } from "../../data/mockHypertension";
-import {
-  kidneyDiseaseData,
-  kidneyDiseaseLongData,
-} from "../../data/mockKidneyDisease";
-import "./App.css";
+} from '../../utils/fns';
+import { hypertensionData } from '../../data/mockHypertension';
+import { kidneyDiseaseData, kidneyDiseaseLongData } from '../../data/mockKidneyDisease';
+import './App.css';
 
 function App(): JSX.Element {
   useEffect(() => {
@@ -18,8 +15,8 @@ function App(): JSX.Element {
     console.log(calculateDropsKidney(kidneyDiseaseLongData));
   }, []);
   return (
-    <div className="App">
-      <p data-testid="home-title">It works</p>
+    <div className='App'>
+      <p data-testid='home-title'>It works</p>
     </div>
   );
 }

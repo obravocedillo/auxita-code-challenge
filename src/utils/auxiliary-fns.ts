@@ -13,7 +13,7 @@ export function valiateData(readings: any[], type: number): boolean {
   try {
     let validateFlag = true;
     for (let i = 0; i < readings.length; i += 1) {
-      const dateComponents = readings[i].atDate.split("/");
+      const dateComponents = readings[i].atDate.split('/');
       const year: number = dateComponents[0];
       const month: number = dateComponents[1];
       const day: number = dateComponents[2];
@@ -31,11 +31,11 @@ export function valiateData(readings: any[], type: number): boolean {
       } else if (type === 1) {
         // Validate integers and floats only in the date
         if (
-          typeof Number(year) !== "number" ||
+          typeof Number(year) !== 'number' ||
           Number.isNaN(Number(year)) ||
-          typeof Number(month) !== "number" ||
+          typeof Number(month) !== 'number' ||
           Number.isNaN(Number(month)) ||
-          typeof Number(day) !== "number" ||
+          typeof Number(day) !== 'number' ||
           Number.isNaN(Number(day))
         ) {
           validateFlag = false;
@@ -67,8 +67,8 @@ export function valiateData(readings: any[], type: number): boolean {
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function sortByDate(readings: any[]): any {
-  const sortdeData = readings.sort((a, b) => {
-    return new Date(b.atDate).getTime() - new Date(a.atDate).getTime();
-  });
+  const sortdeData = readings.sort(
+    (a, b) => new Date(b.atDate).getTime() - new Date(a.atDate).getTime(),
+  );
   return sortdeData;
 }

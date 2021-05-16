@@ -1,0 +1,51 @@
+.hypertension-title{
+    text-align: center;
+    font-size: 1.50rem;
+    color: #3d3d3d;
+    margin-top: 2rem;
+}
+
+.hypertension-table-container{
+    width: 55%;
+    margin-left: 22.5%;
+    margin-right: 22.5%;
+    margin-top: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.hypertension-table-colors{
+    width: 55%;
+    margin-left: 22.5%;
+    margin-right: 22.5%; 
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+}
+
+.hypertension-latest-color:before {
+    content:"• ";
+    font-size: 1.5rem;
+    color: rgba(63,81,181, .5)
+}
+
+
+@media only screen and (max-width: 900px) {
+    .hypertension-table-container{
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .hypertension-table-colors{
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .hypertension-title{
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        text-align: start;
+    }
+    
+}

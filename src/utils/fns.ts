@@ -3,7 +3,7 @@ import {
   GlomerularFiltrationRate,
   GlomerularFiltrationDrops,
 } from '../interfaces/GlomerularFiltrationRate';
-import { sortByDate, valiateData } from './auxiliary-fns';
+import { sortByDate, validateData } from './auxiliary-fns';
 
 /**
  * Functions used in the main flow of the application
@@ -19,7 +19,7 @@ function hypertensionCalculator(bpReadings: BloodPresure[]): string {
     return 'Not enough data';
   }
 
-  if (!valiateData(bpReadings, 0)) {
+  if (!validateData(bpReadings, 0)) {
     return 'Data not valid';
   }
 
@@ -56,7 +56,7 @@ function kidneyDiseaseCalculator(eGFRReadings: GlomerularFiltrationRate[]): stri
     return 'Not enough data';
   }
 
-  if (!valiateData(eGFRReadings, 1)) {
+  if (!validateData(eGFRReadings, 1)) {
     return 'Data not valid';
   }
 
@@ -90,7 +90,7 @@ function calculateDropsKidney(
 ): GlomerularFiltrationDrops[] {
   const allDrops: GlomerularFiltrationDrops[] = [];
   if (eGFRReadings.length >= 3) {
-    if (!valiateData(eGFRReadings, 1)) {
+    if (!validateData(eGFRReadings, 1)) {
       return [];
     }
 

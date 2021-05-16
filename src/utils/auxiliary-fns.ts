@@ -9,7 +9,7 @@
  * @returns A boolean representing if the data is valid, true = data is valid, false = data is not valid
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function valiateData(readings: any[], type: number): boolean {
+export function validateData(readings: any[], type: number): boolean {
   try {
     let validateFlag = true;
     for (let i = 0; i < readings.length; i += 1) {
@@ -27,6 +27,7 @@ export function valiateData(readings: any[], type: number): boolean {
           !Number.isInteger(Number(day))
         ) {
           validateFlag = false;
+          break;
         }
       } else if (type === 1) {
         // Validate integers and floats only in the date
@@ -39,6 +40,7 @@ export function valiateData(readings: any[], type: number): boolean {
           Number.isNaN(Number(day))
         ) {
           validateFlag = false;
+          break;
         }
       }
 
@@ -52,6 +54,7 @@ export function valiateData(readings: any[], type: number): boolean {
         day > 31
       ) {
         validateFlag = false;
+        break;
       }
     }
     return validateFlag;
@@ -67,8 +70,12 @@ export function valiateData(readings: any[], type: number): boolean {
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function sortByDate(readings: any[]): any {
-  const sortdeData = readings.sort(
-    (a, b) => new Date(b.atDate).getTime() - new Date(a.atDate).getTime(),
-  );
-  return sortdeData;
+  try {
+    const sortdeData = readings.sort(
+      (a, b) => new Date(b.atDate).getTime() - new Date(a.atDate).getTime(),
+    );
+    return sortdeData;
+  } catch (error) {
+    return [];
+  }
 }

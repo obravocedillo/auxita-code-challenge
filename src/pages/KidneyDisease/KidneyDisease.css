@@ -13,11 +13,8 @@
 }
 
 .kidney-table-colors{
-    width: 55%;
-    margin-left: 22.5%;
-    margin-right: 22.5%; 
-    margin-bottom: 1rem;
-    margin-top: 2rem;
+    width: 50%;
+    text-align: end;
 }
 
 .kidney-latest-color:before {
@@ -62,6 +59,7 @@
         width: 90%;
         margin-left: 5%;
         margin-right: 5%;
+        text-align: center;
     }
 
     .kidney-title{

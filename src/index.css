@@ -19,6 +19,33 @@ tbody tr:first-of-type{
     margin-top: 2rem;
 }
 
+.global-upper-table{
+    display: flex;
+    flex-direction: row;
+    width: 55%;
+    margin-left: 22.5%;
+    margin-right: 22.5%;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.global-controls{
+    width: 50%;
+}
+
+.global-controls button{
+    padding-top: .3rem;
+    padding-bottom: .3rem;
+    width: 40%;
+    border:none;
+    cursor: pointer;
+
+}
+
+.global-controls button:not(:first-of-type){
+    margin-left: 5%
+}
+
 .global-result-title{
     font-weight: 500;
     color: #3d3d3d;
@@ -42,10 +69,36 @@ tbody tr:first-of-type{
     color: #3d3d3d !important;
 }
 
+.global-active-origin{
+    border: 2px solid #3f51b5 !important;
+    cursor: initial !important;
+    border-radius: 5px;
+}
+
 @media only screen and (max-width: 900px) {
     .global-result{
         width: 90%;
         margin-left: 5%;
         margin-right: 5%;
     }
+
+    .global-upper-table{
+        flex-direction: column;
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .global-controls{
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .global-controls button{
+        width: 40%;
+    }
+    
 }

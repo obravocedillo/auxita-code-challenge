@@ -24,7 +24,7 @@ function Navigation(): JSX.Element {
             className='navigation-title'
             data-testid='navigation-title'
           >
-            Heltch Care Assistant
+            Health Care Assistant
           </Typography>
           <button
             data-testid='navigation-item'

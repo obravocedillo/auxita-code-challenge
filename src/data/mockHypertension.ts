@@ -18,3 +18,8 @@ export const hypertensionWrongData: BloodPresure[] = [
   { SysBP: 120, DiaBP: 90, atDate: '2018/10/31' },
   { SysBP: 115, DiaBP: 100, atDate: '2018.1/11/20' },
 ];
+
+export const hypertensionStage3Data: BloodPresure[] = [
+  { SysBP: 181, DiaBP: 121, atDate: '2018/10/31' },
+  { SysBP: 115, DiaBP: 100, atDate: '2018.1/11/20' },
+];

@@ -47,6 +47,10 @@
     background: rgba(214, 60, 109, 0.5);
 }
 
+.drops-contaner{
+    margin-top: .5rem;
+}
+
 @media only screen and (max-width: 900px) {
     .kidney-table-container{
         width: 90%;

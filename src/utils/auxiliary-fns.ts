@@ -1,5 +1,5 @@
 /**
- * Auxiliary functions not used in the main flow of the application
+ * Auxiliary functions
  */
 
 /**

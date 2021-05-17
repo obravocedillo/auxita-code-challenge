@@ -4,7 +4,8 @@ module.exports = {
     'airbnb/hooks',
     'plugin:@typescript-eslint/recommended',
     'plugin:jest/recommended',
-    'plugin:prettier/recommended',
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint"
   ],
   plugins: ['react', '@typescript-eslint', 'jest'],
   env: {
@@ -27,10 +28,18 @@ module.exports = {
   },
   rules: {
     'linebreak-style': 'off',
-    'prettier/prettier': [
-      'error',
+    "react/jsx-one-expression-per-line": "off",
+    "prettier/prettier": [
+      "error",
       {
-        endOfLine: 'auto',
+        "trailingComma": "all",
+        "tabWidth": 2,
+        "printWidth": 90,
+        "semi": true,
+        "singleQuote": true,
+        "jsxSingleQuote": true,
+        "arrowParens": "always",
+        "endOfLine": "auto"
       },
     ],
   },

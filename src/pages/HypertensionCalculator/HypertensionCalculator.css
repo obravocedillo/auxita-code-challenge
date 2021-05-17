@@ -9,16 +9,12 @@
     width: 55%;
     margin-left: 22.5%;
     margin-right: 22.5%;
-    margin-top: 2rem;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
 .hypertension-table-colors{
-    width: 55%;
-    margin-left: 22.5%;
-    margin-right: 22.5%; 
-    margin-bottom: 1rem;
-    margin-top: 2rem;
+    width: 50%;
+    text-align: end;
 }
 
 .hypertension-latest-color:before {
@@ -39,6 +35,7 @@
         width: 90%;
         margin-left: 5%;
         margin-right: 5%;
+        text-align: center;
     }
 
     .hypertension-title{

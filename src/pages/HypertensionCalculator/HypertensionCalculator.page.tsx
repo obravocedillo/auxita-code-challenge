@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -14,15 +15,9 @@ import Navigation from '../../components/Navigation/Navigation.component';
 import './HypertensionCalculator.css';
 
 function HypertensionCalculatorPage(): JSX.Element {
+  const [activeDataOrigin, setActiveDataOrigin] = useState<string>('local');
   const [lastReadingResult, setLastReading] = useState<string>('');
   const [blodPressureReadings, setBlodPressureReadings] = useState<BloodPresure[]>([]);
-
-  // Set data on initialization
-  useEffect(() => {
-    setLastReading(hypertensionCalculator(hypertensionData));
-    setBlodPressureReadings(sortByDate(hypertensionData));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   /**
    * @desc Renders an element depending if data is valid and has enough length
@@ -32,7 +27,7 @@ function HypertensionCalculatorPage(): JSX.Element {
   const lastReadingRender = (result: string) => {
     if (result === 'Not enough data') {
       return (
-        <div className='result'>
+        <div className='global-result'>
           <p>Not enough data</p>
         </div>
       );
@@ -56,14 +51,67 @@ function HypertensionCalculatorPage(): JSX.Element {
     return '';
   };
 
+  /**
+   * @desc Loads data from api and set state to that data
+   */
+  const loadApiData = async (): Promise<void> => {
+    try {
+      const url =
+        'http://auxitacodechallengeserver-env.eba-na8mjqqk.us-west-2.elasticbeanstalk.com/hypertension/get-hypertension-readings';
+      const apiDataResutl = await axios.get(url);
+      setLastReading(hypertensionCalculator(apiDataResutl.data));
+      setBlodPressureReadings(sortByDate(apiDataResutl.data));
+      setActiveDataOrigin('api');
+    } catch (error) {
+      console.log(error);
+      setLastReading(hypertensionCalculator([]));
+      setBlodPressureReadings(sortByDate([]));
+      setActiveDataOrigin('api');
+    }
+  };
+
+  /**
+   * @desc Loads data from local mock and set state to that data
+   */
+  const loadLocalMockData = (): void => {
+    setLastReading(hypertensionCalculator(hypertensionData));
+    setBlodPressureReadings(sortByDate(hypertensionData));
+    setActiveDataOrigin('local');
+  };
+
+  // Set data on initialization
+  useEffect(() => {
+    setLastReading(hypertensionCalculator(hypertensionData));
+    setBlodPressureReadings(sortByDate(hypertensionData));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className='hypertension'>
       <Navigation />
       <h2 className='hypertension-title' data-testid='hypertension-title'>
         Hypertension Calculator
       </h2>
-      <div className='hypertension-table-colors'>
-        <span className='hypertension-latest-color'>Latest result</span>
+      <div className='global-upper-table'>
+        <div className='global-controls'>
+          <button
+            onClick={() => loadLocalMockData()}
+            type='button'
+            className={activeDataOrigin === 'local' ? 'global-active-origin' : ''}
+          >
+            Local data
+          </button>
+          <button
+            onClick={() => loadApiData()}
+            type='button'
+            className={activeDataOrigin === 'api' ? 'global-active-origin' : ''}
+          >
+            Api data
+          </button>
+        </div>
+        <div className='hypertension-table-colors'>
+          <span className='hypertension-latest-color'>Latest result</span>
+        </div>
       </div>
       <div className='hypertension-table-container'>
         <TableContainer>

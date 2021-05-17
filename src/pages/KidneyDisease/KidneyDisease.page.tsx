@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -18,6 +19,7 @@ import {
 import './KidneyDisease.css';
 
 function KidneyDisease(): JSX.Element {
+  const [activeDataOrigin, setActiveDataOrigin] = useState<string>('local');
   const [lastReadingResult, setLastReading] = useState<string>('');
   const [kidneyDiseaseReadings, setBlodkidneyDiseaseReadings] = useState<
     GlomerularFiltrationRate[]
@@ -85,11 +87,40 @@ function KidneyDisease(): JSX.Element {
     return '';
   };
 
-  // Set data on initialization
-  useEffect(() => {
+  /**
+   * @desc Loads data from api and set state to that data
+   */
+  const loadApiData = async (): Promise<void> => {
+    try {
+      const url =
+        'http://auxitacodechallengeserver-env.eba-na8mjqqk.us-west-2.elasticbeanstalk.com';
+      const apiDataResutl = await axios.get(url);
+      setLastReading(kidneyDiseaseCalculator(apiDataResutl.data));
+      setBlodkidneyDiseaseReadings(sortByDate(apiDataResutl.data));
+      setDropsKidney(calculateDropsKidney(apiDataResutl.data));
+      setActiveDataOrigin('api');
+    } catch (error) {
+      console.log(error);
+      setLastReading(kidneyDiseaseCalculator([]));
+      setBlodkidneyDiseaseReadings(sortByDate([]));
+      setDropsKidney(calculateDropsKidney([]));
+      setActiveDataOrigin('api');
+    }
+  };
+
+  /**
+   * @desc Loads data from local mock and set state to that data
+   */
+  const loadLocalMockData = (): void => {
     setLastReading(kidneyDiseaseCalculator(kidneyDiseaseLongData));
     setBlodkidneyDiseaseReadings(sortByDate(kidneyDiseaseLongData));
     setDropsKidney(calculateDropsKidney(kidneyDiseaseLongData));
+    setActiveDataOrigin('local');
+  };
+
+  // Set data on initialization
+  useEffect(() => {
+    loadLocalMockData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -99,10 +130,33 @@ function KidneyDisease(): JSX.Element {
       <h2 className='kidney-title' data-testid='kidney-title'>
         Kidney Disease Calculator
       </h2>
-      <div className='kidney-table-colors'>
-        <span className='kidney-latest-color'>Latest result</span>
-        <span className='kidney-drop-color'>20% or more eGFR drop</span>
+
+      {/* Controls */}
+      <div className='global-upper-table'>
+        <div className='global-controls'>
+          <button
+            onClick={() => loadLocalMockData()}
+            type='button'
+            className={activeDataOrigin === 'local' ? 'global-active-origin' : ''}
+          >
+            Local data
+          </button>
+          <button
+            onClick={() => loadApiData()}
+            type='button'
+            className={activeDataOrigin === 'api' ? 'global-active-origin' : ''}
+          >
+            Api data
+          </button>
+        </div>
+        <div className='kidney-table-colors'>
+          <span className='kidney-latest-color'>Latest result</span>
+          <span className='kidney-drop-color'>20% or more eGFR drop</span>
+        </div>
       </div>
+      {/* Controls */}
+
+      {/* Table */}
       <div className='kidney-table-container'>
         <TableContainer>
           <Table stickyHeader aria-label='sticky table' className='kidney-table'>
@@ -128,6 +182,8 @@ function KidneyDisease(): JSX.Element {
           </Table>
         </TableContainer>
       </div>
+      {/* Table */}
+
       {lastReadingRender(lastReadingResult)}
     </div>
   );

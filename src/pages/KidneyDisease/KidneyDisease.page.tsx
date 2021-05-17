@@ -24,6 +24,11 @@ function KidneyDisease(): JSX.Element {
   >([]);
   const [dropsKidney, setDropsKidney] = useState<GlomerularFiltrationDrops[]>([]);
 
+  /**
+   * @desc Searches for the match between the element passed in the parameter and the elements in drops array
+   * @param arrayElement Element in lastReadingResult array
+   * @returns Returns true or false depending if the item was found in the drops array
+   */
   const isInDropArray = (arrayElement: GlomerularFiltrationRate): boolean => {
     let itemFoundFLag = false;
     for (let i = 0; i < dropsKidney.length; i += 1) {
@@ -64,6 +69,16 @@ function KidneyDisease(): JSX.Element {
           <span className='global-result-title'>Result of latest reading: </span>
           <span className='global-result-date'>({kidneyDiseaseReadings[0].atDate})</span>
           <p className='global-result-value'>{result}</p>
+          <span className='global-result-title'>20% or more eGFR drops: </span>
+          {dropsKidney.map((singleDrop: GlomerularFiltrationDrops) => {
+            return (
+              <div className='drops-contaner' key={singleDrop.atDate}>
+                <span className='global-result-value'>{singleDrop.atDate} </span>
+                <span className='global-result-value'> - </span>
+                <span className='global-result-value'> {singleDrop.drop}</span>
+              </div>
+            );
+          })}
         </div>
       );
     }

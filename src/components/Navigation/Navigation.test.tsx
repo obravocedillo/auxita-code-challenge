@@ -6,10 +6,10 @@ import HypertensionCalculatorPage from '../../pages/HypertensionCalculator/Hyper
 import KidneyDisease from '../../pages/KidneyDisease/KidneyDisease.page';
 
 describe('Navigation component testing', () => {
-  test('Navigation should render a title with Heltch Care Assistant text', async () => {
+  test('Navigation should render a title with Health Care Assistant text', async () => {
     render(<Navigation />);
     const navigationTitle = await screen.getByTestId('navigation-title');
-    expect(navigationTitle.innerHTML).toEqual('Heltch Care Assistant');
+    expect(navigationTitle.innerHTML).toEqual('Health Care Assistant');
   });
 
   test('Navigation should render two navigation items', async () => {

@@ -63,7 +63,7 @@ function kidneyDiseaseCalculator(eGFRReadings: GlomerularFiltrationRate[]): stri
   const sortedReadings = sortByDate(eGFRReadings);
 
   if (sortedReadings[0].eGFR >= 90) {
-    return 'normal';
+    return 'Normal';
   }
 
   if (sortedReadings[0].eGFR >= 60 && sortedReadings[0].eGFR <= 89) {
@@ -89,7 +89,7 @@ function calculateDropsKidney(
   eGFRReadings: GlomerularFiltrationRate[],
 ): GlomerularFiltrationDrops[] {
   const allDrops: GlomerularFiltrationDrops[] = [];
-  if (eGFRReadings.length >= 3) {
+  if (eGFRReadings.length >= 2) {
     if (!validateData(eGFRReadings, 1)) {
       return [];
     }
@@ -98,9 +98,6 @@ function calculateDropsKidney(
 
     const percentageDrop: number = Math.abs(
       (sortedReadings[0].eGFR * 100) / sortedReadings[1].eGFR - 100,
-    );
-    const secondPercentageDrop: number = Math.abs(
-      (sortedReadings[0].eGFR * 100) / sortedReadings[2].eGFR - 100,
     );
 
     // Push elements with more than 20% of drop and remove decimals
@@ -112,12 +109,19 @@ function calculateDropsKidney(
       });
     }
 
-    if (secondPercentageDrop >= 20) {
-      allDrops.push({
-        eGFR: sortedReadings[2].eGFR,
-        atDate: sortedReadings[2].atDate,
-        drop: `${Math.trunc(secondPercentageDrop)}%`,
-      });
+    // Check if length is 3 or bigger to obtain the drop in second consecutive element
+    if (eGFRReadings.length >= 3) {
+      const secondPercentageDrop: number = Math.abs(
+        (sortedReadings[0].eGFR * 100) / sortedReadings[2].eGFR - 100,
+      );
+      // Push elements with more than 20% of drop and remove decimals
+      if (secondPercentageDrop >= 20) {
+        allDrops.push({
+          eGFR: sortedReadings[2].eGFR,
+          atDate: sortedReadings[2].atDate,
+          drop: `${Math.trunc(secondPercentageDrop)}%`,
+        });
+      }
     }
   }
 

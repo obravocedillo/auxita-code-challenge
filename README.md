@@ -30,7 +30,7 @@ Database:
 ## Project testing coverage
 <img width="1131" alt="Auxita test coverage" src="https://user-images.githubusercontent.com/21973010/118556508-94079880-b729-11eb-8830-67cf747cf736.png">
 
-# Getting Started with Create React App
+## Project created with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

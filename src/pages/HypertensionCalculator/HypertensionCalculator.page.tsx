@@ -63,7 +63,6 @@ function HypertensionCalculatorPage(): JSX.Element {
       setBlodPressureReadings(sortByDate(apiDataResutl.data));
       setActiveDataOrigin('api');
     } catch (error) {
-      console.log(error);
       setLastReading(hypertensionCalculator([]));
       setBlodPressureReadings(sortByDate([]));
       setActiveDataOrigin('api');

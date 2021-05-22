@@ -100,7 +100,6 @@ function KidneyDisease(): JSX.Element {
       setDropsKidney(calculateDropsKidney(apiDataResutl.data));
       setActiveDataOrigin('api');
     } catch (error) {
-      console.log(error);
       setLastReading(kidneyDiseaseCalculator([]));
       setBlodkidneyDiseaseReadings(sortByDate([]));
       setDropsKidney(calculateDropsKidney([]));
